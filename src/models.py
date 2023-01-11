@@ -15,12 +15,20 @@ class User(Base):
     lastname = Column(String(100), nullable=False)
     email = Column(String(250), nullable=False)
 
+    def to_dict(self):
+        return {}
+
+
 class Planet(Base):
     __tablename__ = 'planet'
     id = Column(Integer, primary_key=True)
     planet_name = Column(String(50))
     climate = Column(String(30))
     population = Column(Integer, nullable=True)
+
+    def to_dict(self):
+        return {}
+
 
 class Character(Base):
     __tablename__ = 'character'
@@ -31,11 +39,24 @@ class Character(Base):
     affilliation = Column(String(250), nullable=False)
     planet_id = Column(Integer, ForeignKey('planet.id'))
 
-class Favorites(Base):
-    __tablename__ = 'favorites'
+    def to_dict(self):
+        return {}
+
+
+class FavoritePlanet(Base):
+    __tablename__ = 'favorite planet'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     planet_id = Column(Integer, ForeignKey('planet.id'))
+
+    def to_dict(self):
+        return {}
+
+
+class FavoriteCharacter(Base):
+    __tablename__ = 'favorite character'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
     character_id = Column(Integer, ForeignKey('character.id'))
 
     def to_dict(self):
